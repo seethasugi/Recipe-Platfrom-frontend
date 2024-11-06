@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import { Grid, Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import axios from "axios";
+import {
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+} from "@mui/material";
 import Navbar from "./Navbar";
 
 const Home = () => {
-  const [recipes, setRecipes] = useState([
-  ]);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/recipes", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
+    axios
+      .get("https://h3x2y9-5000.csb.app/api/recipes", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => setRecipes(response.data))
       .catch((error) => console.error("Error fetching recipes", error));
   }, []);
@@ -20,7 +27,16 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <Typography variant="h4" gutterBottom style={{ paddingTop: 50, paddingBottom: 30, paddingRight: 40, paddingLeft: 40 }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        style={{
+          paddingTop: 50,
+          paddingBottom: 30,
+          paddingRight: 40,
+          paddingLeft: 40,
+        }}
+      >
         Featured Recipes
       </Typography>
       <Grid container spacing={4} style={{ paddingLeft: 40, paddingRight: 40 }}>
@@ -30,7 +46,7 @@ const Home = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={`http://localhost:5000/${recipe.image}`}
+                image={`https://h3x2y9-5000.csb.app/${recipe.image}`}
                 alt={recipe.title}
               />
               <CardContent>

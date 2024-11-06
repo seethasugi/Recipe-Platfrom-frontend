@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { TextField, Button, Container, Typography } from "@mui/material";
 import Navbar from "./Navbar";
 
@@ -7,7 +7,12 @@ const ProfilePage = () => {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/auth/profile/${localStorage.getItem('userId')}`)
+    axios
+      .get(
+        `https://h3x2y9-5000.csb.app/api/auth/profile/${localStorage.getItem(
+          "userId"
+        )}`
+      )
       .then((response) => setProfile(response.data))
       .catch((error) => console.error("Error fetching profile", error));
   }, []);
@@ -22,16 +27,24 @@ const ProfilePage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.put(`http://localhost:5000/api/auth/users/${localStorage.getItem('userId')}`, profile)
-      .then((response) => {console.log("Profile updated")
-        localStorage.setItem("userName",response.data.user.name)})
+    axios
+      .put(
+        `https://h3x2y9-5000.csb.app/api/auth/users/${localStorage.getItem(
+          "userId"
+        )}`,
+        profile
+      )
+      .then((response) => {
+        console.log("Profile updated");
+        localStorage.setItem("userName", response.data.user.name);
+      })
       .catch((error) => console.error("Error updating profile", error));
   };
 
   return (
     <>
       <Navbar />
-      <Container style={{paddingTop:50}}>
+      <Container style={{ paddingTop: 50 }}>
         <Typography variant="h4" gutterBottom>
           Edit Profile
         </Typography>
